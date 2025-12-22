@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --default-font-family: "Space Grotesk", sans-serif;
+}
+
+@layer utilities {
+    .shimmer {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .shimmer::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.35), transparent 70%);
+        transform: translateX(-100%);
+        pointer-events: none;
+    }
+
+    .shimmer:hover::after {
+        animation: shimmer 1.2s ease-out;
+    }
+
+    @keyframes shimmer {
+        to {
+            transform: translateX(100%);
+        }
+    }
+
+    .card-shimmer {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-shimmer::after {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.28), transparent 65%);
+        transform: translateX(-120%);
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0;
+
+        animation: card-shimmer 26s ease-in-out infinite;
+        /* animation-delay: 2.5s; */
+        animation-fill-mode: both;
+    }
+
+    .card-shimmer>* {
+        position: relative;
+        z-index: 1;
+    }
+
+    @keyframes card-shimmer {
+        0% {
+            transform: translateX(-120%);
+            opacity: 0;
+        }
+
+        6% {
+            opacity: 1;
+        }
+
+        14% {
+            transform: translateX(120%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(120%);
+            opacity: 0;
+        }
+    }
+}
